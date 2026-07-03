@@ -53,12 +53,13 @@ async function run() {
     const buildOut = execSync('npm run build', { encoding: 'utf8' });
     logs += buildOut + '\n';
     buildPassed = true;
-
     console.log('Health check passed. Site is stable.');
-    
-    // Optionally alert on success
-    // await sendAlert('✅ Site Health Check Passed', 'The daily publishing job succeeded. No issues found.');
-
+    console.log('Submitting updated URLs to IndexNow...');
+    try {
+      execSync('node scripts/submit-indexnow.js', { stdio: 'inherit' });
+    } catch (indexNowError) {
+      console.error('IndexNow submission failed:', indexNowError.message);
+    }
   } catch (error) {
     logs += error.stdout + '\n' + error.stderr + '\n' + error.message;
     console.error('Health check failed! Error logs:', logs);

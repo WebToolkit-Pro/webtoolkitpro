@@ -1,10 +1,11 @@
 import { MetadataRoute } from 'next'
+import { TOOL_COUNT } from '@/lib/constants'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'WebToolkit Pro',
     short_name: 'WTK Pro',
-    description: '190+ Free Premium Online Developer Tools',
+    description: `${TOOL_COUNT} Free Premium Online Developer Tools`,
     start_url: '/',
     display: 'standalone',
     background_color: '#0B1120',

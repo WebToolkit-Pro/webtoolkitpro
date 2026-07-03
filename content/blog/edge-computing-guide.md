@@ -150,6 +150,21 @@ When migrating traditional Node.js applications to V8 Isolates, many developers 
 **The Anycast Routing Trap**
 Anycast DNS routes users to the physically closest edge node. However, ISPs sometimes misconfigure their BGP routing tables. This can cause a user in London to be mistakenly routed to an edge node in Germany instead of the local London data center. You must actively monitor `CF-Ray` or `X-Edge-Location` headers to verify BGP is behaving optimally.
 
+## Edge Impact on Core Web Vitals (LCP, INP)
+
+While optimizing frontend assets—compressing images, standardizing CSS, and minifying JavaScript—is crucial, physical network latency remains a strict bottleneck. Network routing introduces a mandatory latency floor that no amount of code compression can bypass. Migrating routing logic and HTML pre-rendering to globally distributed Edge nodes solves this by directly optimizing Core Web Vitals:
+
+- **Largest Contentful Paint (LCP):** LCP is heavily dependent on **Time to First Byte (TTFB)**. If the origin server takes 200ms to compile the page and send the first byte across the ocean, the LCP is delayed proportionally. Deploying layouts to Edge Servers allows the local node to handle the rendering loop, dropping TTFB to under 5ms.
+- **Interaction to Next Paint (INP):** Heavy client-side JavaScript execution locks the browser’s main thread, causing user inputs to feel laggy. By offloading complex validation and API preprocessing to the Edge, you free up the browser's main thread, keeping INP under the 200ms Google threshold.
+
+### Comparison: Node.js Containers vs. Edge V8 Isolates
+
+| Feature | Standard Node.js Container | Edge V8 Isolate (Workers / Runtime) |
+| :--- | :---: | :---: |
+| **Boot Time (Cold Start)** | 500 ms – 3000 ms | **Near Zero (< 5 ms)** |
+| **Memory Footprint** | 128 MB – 1 GB | **1 MB – 128 MB** |
+| **Global Routing Latency** | High (Round-trip to origin) | **Ultra Low (Local hop)** |
+
 ---
 
 ## Comprehensive FAQ

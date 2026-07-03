@@ -1,6 +1,7 @@
 import React from 'react'
 import { Metadata } from 'next'
 import Logo from '@/components/ui/Logo'
+import { TOOL_COUNT } from '@/lib/constants'
 import { Shield, Zap, Star, Code2, Info, CheckCircle2, AlertCircle } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -103,7 +104,7 @@ export default function BrandGuidelines() {
             </div>
             <div className="font-mono text-emerald-400 mb-6">DM SANS — PRIMARY UI FONT</div>
             <p className="text-[#8A9BBE] leading-relaxed max-w-xl mb-12">
-              WebToolkit Pro offers 190+ free premium developer tools. Format JSON, generate passwords, encode data, and master SEO — all in one place.
+              WebToolkit Pro offers {TOOL_COUNT} free premium developer tools. Format JSON, generate passwords, encode data, and master SEO — all in one place.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8 border-t border-[#1E2D47]">
               <div>

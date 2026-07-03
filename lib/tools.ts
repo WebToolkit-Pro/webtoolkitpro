@@ -155,24 +155,23 @@ export function getRelatedToolsForWidget(currentTool: ToolConfig) {
     
     return icon
   }
-
   return {
     featured: {
       name: related[0].name,
-      href: `/tools/${related[0].slug}`,
+      href: `/tools/${related[0].slug}/`,
       desc: related[0].function.primary,
       icon: related[0].icon || 'Zap',
       badge: 'Recommended'
     },
     cards: related.slice(1, 4).map(t => ({
       name: t.name,
-      href: `/tools/${t.slug}`,
+      href: `/tools/${t.slug}/`,
       desc: t.function.primary,
       icon: t.icon || 'Zap'
     })),
     pills: related.slice(4).map(t => ({
       name: t.name,
-      href: `/tools/${t.slug}`
+      href: `/tools/${t.slug}/`
     })),
     resolveIcon // Export helper for use in page
   }

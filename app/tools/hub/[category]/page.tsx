@@ -82,7 +82,7 @@ export default function HubPage({ params }: HubPageProps) {
             return (
               <Link
                 key={tool.slug}
-                href={`/tools/${tool.slug}`}
+                href={`/tools/${tool.slug}/`}
                 className="group bg-white dark:bg-slate-900 rounded-[2rem] p-8 border border-gray-100 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:shadow-blue-500/5 hover:-translate-y-2 transition-all duration-300 flex flex-col items-start"
               >
                 <div className="w-16 h-16 bg-blue-50 dark:bg-blue-900/10 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">

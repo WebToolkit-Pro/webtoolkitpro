@@ -14,7 +14,7 @@ export async function GET() {
   markdown += `## 1. Engineering Articles\n\n`
   posts.forEach(post => {
     markdown += `### ${post.title}\n`
-    markdown += `URL: ${baseUrl}/blog/${post.slug}\n`
+    markdown += `URL: ${baseUrl}/blog/${post.slug}/\n`
     markdown += `Category: ${post.category}\n\n`
     markdown += `${post.content || post.description}\n\n`
     markdown += `---\n\n`
@@ -23,7 +23,7 @@ export async function GET() {
   markdown += `## 2. Developer Tools\n\n`
   tools.forEach(tool => {
     markdown += `### ${tool.name}\n`
-    markdown += `URL: ${baseUrl}/tools/${tool.slug}\n`
+    markdown += `URL: ${baseUrl}/tools/${tool.slug}/\n`
     markdown += `Category: ${tool.category}\n`
     markdown += `Description: ${tool.content?.description || ''}\n`
     markdown += `Entity Definition: ${tool.content?.entity_definition || ''}\n`

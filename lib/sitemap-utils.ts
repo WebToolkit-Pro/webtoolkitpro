@@ -92,7 +92,7 @@ export function getMainUrls(): SitemapUrl[] {
   }))
 
   const guideUrls: SitemapUrl[] = GUIDES_DATA.map((guide) => ({
-    url: `${BASE_URL}/guides/${guide.slug}`,
+    url: `${BASE_URL}/guides/${guide.slug}/`,
     lastModified: TODAY,
     changeFrequency: 'monthly',
     priority: 0.8,
@@ -108,7 +108,7 @@ export function getToolUrls(): SitemapUrl[] {
     .map((tool) => {
       const releaseDate = tool.releaseDate ? new Date(tool.releaseDate) : TODAY
       return {
-        url: `${BASE_URL}/tools/${tool.slug}`,
+        url: `${BASE_URL}/tools/${tool.slug}/`,
         lastModified: isNaN(releaseDate.getTime()) ? TODAY : releaseDate,
         changeFrequency: 'monthly',
         priority: 0.8,
@@ -123,7 +123,7 @@ export function getBlogUrls(): SitemapUrl[] {
     .map((post) => {
       const d = new Date(post.date)
       return {
-        url: `${BASE_URL}/blog/${post.slug}`,
+        url: `${BASE_URL}/blog/${post.slug}/`,
         lastModified: isNaN(d.getTime()) ? TODAY : d,
         changeFrequency: 'monthly',
         priority: 0.7,

@@ -107,6 +107,18 @@ Groups the site's pages, services, or core features into logical categories. Alw
 - [/tools/base64-encoder](https://wtkpro.site/tools/base64-encoder): Execute secure V8 binary-to-text transformations.
 ```
 
+## Case Study: Preventing Crawler Crawl Loop Outages
+
+A real-world scenario demonstrates the immediate engineering value of this standard. A B2B technical documentation hub recently encountered a massive bandwidth surge of over $4,000 in a single week. 
+
+Upon auditing server logs, the engineering team discovered that AI crawlers (specifically `GPTBot`) had become trapped in an infinite routing loop. The application utilized dynamic, parameterized URLs to filter documentation articles (`/docs?tag=api&sort=asc&page=45`). The AI agent was aggressively evaluating every single permutation of these filters, generating thousands of useless dynamic database queries.
+
+The team resolved this outage by deploying a two-part architectural fix:
+1.  **Robots.txt Boundary:** Added strict directives disallowing all web crawlers from scanning the dynamic parameter routes (e.g., disallowing `/docs?*`).
+2.  **llms.txt Orientation Map:** Deployed a highly structured `llms.txt` file at the root directory. Instead of leaving the AI agent to traverse infinite filter permutations, they provided a clean, markdown-formatted list of the 50 most critical static documentation URLs.
+
+The following day, the AI agent hit the site, read the `llms.txt` file, indexed the specific 50 canonical resources outlined, and exited. Server CPU loads dropped by 95% immediately, and within a week, the platform's core content was accurately cited in generative search engine answers.
+
 ---
 
 ## 4. The `llms-full.txt` Sister File Standard

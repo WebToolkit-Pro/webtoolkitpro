@@ -121,6 +121,37 @@ console.log(numRegex.test("123")); // FALSE! (starts scanning at index 3)
 ```
 If you execute the same regex `.test()` multiple times without manually resetting `.lastIndex = 0`, it will start failing randomly. To fix this in React forms, instantiate a fresh regex inside the function scope or remove the `g` flag for single-string validations.
 
+## Common Practical Input Validation Patterns
+
+To ensure secure and reliable validations across your application, incorporate these standard regex blueprints:
+
+### 1. Practical Email Validation
+*   **Pattern:** `/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/u`
+*   **Usage:**
+```typescript
+export function isValidEmail(email: string): boolean {
+  if (email.length > 254) return false; // Enforce RFC limit to protect regex engine
+  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/u.test(email);
+}
+```
+
+### 2. Strong Password Audit (Lookahead Assertions)
+*   **Pattern:** `/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,32}$/u`
+*   **Usage:**
+```typescript
+export function isStrongPassword(password: string): boolean {
+  // Verifies at least 1 lowercase, 1 uppercase, 1 digit, 1 special char, 8-32 length
+  const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,32}$/u;
+  return pattern.test(password);
+}
+```
+
+### 3. Alphanumeric Username Requirements
+*   **Pattern:** `/^[a-zA-Z0-9_-]{3,16}$/u`
+*   **Usage:** Allows letters, numbers, hyphens, and underscores, between 3 and 16 characters.
+
+---
+
 <!-- ═══════════════════════════════════════════════════════
 TOOL INTEGRATION — natural, not forced
 ═══════════════════════════════════════════════════════ -->

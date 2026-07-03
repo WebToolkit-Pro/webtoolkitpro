@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Search, Command, X, Zap } from 'lucide-react'
 import DynamicIcon from './DynamicIcon'
+import { TOOL_COUNT } from '@/lib/constants'
 
 interface MinimalTool {
   slug: string
@@ -73,7 +74,7 @@ export default function CommandBar({ tools }: CommandBarProps) {
       if (filteredTools.length > 0) {
         const selected = filteredTools[activeIndex]
         setIsOpen(false)
-        router.push(`/tools/${selected.slug}`)
+        router.push(`/tools/${selected.slug}/`)
       }
     }
   }
@@ -111,7 +112,7 @@ export default function CommandBar({ tools }: CommandBarProps) {
           {search.trim() === '' ? (
             <div className="p-12 text-center text-gray-500 dark:text-[#8A9BBE]">
               <Command className="w-10 h-10 mx-auto mb-4 opacity-20" />
-              <p className="text-sm">Search across 190+ developer tools, formats, and generators.</p>
+              <p className="text-sm">Search across {TOOL_COUNT} developer tools, formats, and generators.</p>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
                 <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-[#1E2D47] rounded-md">Try: &quot;format json&quot;</span>
                 <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-[#1E2D47] rounded-md">Try: &quot;decode jwt&quot;</span>
@@ -125,7 +126,7 @@ export default function CommandBar({ tools }: CommandBarProps) {
                   key={tool.slug}
                   onClick={() => {
                     setIsOpen(false)
-                    router.push(`/tools/${tool.slug}`)
+                    router.push(`/tools/${tool.slug}/`)
                   }}
                   onMouseEnter={() => setActiveIndex(index)}
                   className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-colors text-left ${
